@@ -10,22 +10,23 @@
         angular.module("linkHolder",[]);
     </script>
      <script src="js/controllers/linkHolder.js"></script>
+     <script src="js/controllers/folderList.js"></script>
 </head>
 <body ng-controller="linkHolderCtrl">
     <div class="navbar navbar-inverse">
             <a class="navbar-brand" href="#">Link Holder</a>
     </div>
-    <div class="panel panel-default row">
+    <div class="panel panel-default row" ng-controller="folderListCtrl">
         <div class="col-xs-3">
-            <a ng-click="selectCategory()" 
+            <a ng-click="selectFolder()" 
                 class="btn btn-block btn-default btn-lg">Home</a>
              <a ng-repeat="folder in data.folders | orderBy:'name'"   
-                ng-click="selectCategory(folder)" class=" btn btn-block btn-default btn-lg">
+                ng-click="selectFolder(folder.name)" class=" btn btn-block btn-default btn-lg">
                  {{folder.name}}
              </a>
         </div>
         <div class="col-xs-8">
-            <div class="well" ng-repeat="folder in data.folders">
+            <div class="well" ng-repeat="folder in data.folders | filter:folderFilterFn">
                 <i>{{folder.name}}</i>
                 <div class="well" ng-repeat="link in folder.myLinks">
                     <h3>

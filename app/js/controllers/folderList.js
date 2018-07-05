@@ -1,9 +1,9 @@
-angular.module("sportsStore")
+angular.module("linkHolder")
     .controller("folderListCtrl", function ($scope, $filter) {
 
         var selectedFolder = null;
 
-        $scope.selectCategory = function (newFolder) {
+        $scope.selectFolder = function (newFolder) {
             selectedFolder = newFolder;
         }
 
