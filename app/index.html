@@ -1,0 +1,40 @@
+<!doctype html>
+<html ng-app='linkHolder'>
+<head>
+    <meta charset="utf-8">
+    <title>Link Holder</title>
+    <script src="js/lib/angular.min.js"></script>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/lhstyles.css" rel="stylesheet" />
+    <script>
+        angular.module("linkHolder",[]);
+    </script>
+     <script src="js/controllers/linkHolder.js"></script>
+</head>
+<body ng-controller="linkHolderCtrl">
+    <div class="navbar navbar-inverse">
+            <a class="navbar-brand" href="#">Link Holder</a>
+    </div>
+    <div class="panel panel-default row">
+        <div class="col-xs-3">
+            <a ng-click="selectCategory()" 
+                class="btn btn-block btn-default btn-lg">Home</a>
+             <a ng-repeat="folder in data.folders | orderBy:'name'"   
+                ng-click="selectCategory(folder)" class=" btn btn-block btn-default btn-lg">
+                 {{folder.name}}
+             </a>
+        </div>
+        <div class="col-xs-8">
+            <div class="well" ng-repeat="folder in data.folders">
+                <i>{{folder.name}}</i>
+                <div class="well" ng-repeat="link in folder.myLinks">
+                    <h3>
+                        <strong>{{link.body}}</strong>
+                    </h3>
+                    <span class="lead">{{link.description}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
