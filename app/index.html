@@ -7,10 +7,11 @@
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/lhstyles.css" rel="stylesheet" />
     <script>
-        angular.module("linkHolder",[]);
+        angular.module("linkHolder",["customFilters"]);
     </script>
      <script src="js/controllers/linkHolder.js"></script>
      <script src="js/controllers/folderList.js"></script>
+     <script src="js/filters/custom.js"></script>
 </head>
 <body ng-controller="linkHolderCtrl">
     <div class="navbar navbar-inverse">
@@ -21,12 +22,14 @@
             <a ng-click="selectFolder()" 
                 class="btn btn-block btn-default btn-lg">Home</a>
              <a ng-repeat="folder in data.folders | orderBy:'name'"   
-                ng-click="selectFolder(folder.name)" class=" btn btn-block btn-default btn-lg">
+                ng-click="selectFolder(folder.name)" class=" btn btn-block btn-default btn-lg"
+                ng-class="getFolderClass(folder.name)">
                  {{folder.name}}
              </a>
         </div>
         <div class="col-xs-8">
-            <div class="well" ng-repeat="folder in data.folders | filter:folderFilterFn">
+            <div class="well" ng-repeat=
+            "folder in data.folders | filter:folderFilterFn | range:selectedPage:pageSize">
                 <i>{{folder.name}}</i>
                 <div class="well" ng-repeat="link in folder.myLinks">
                     <h3>
@@ -35,6 +38,14 @@
                     <span class="lead">{{link.description}}</span>
                 </div>
             </div>
+            <div class="pull-right btn-group">
+                <a ng-repeat=
+                    "page in data.folders | filter:categoryFilterFn | pageCount:pageSize"
+                    ng-click="selectPage($index + 1)" class="btn btn-default"
+                    ng-class="getPageClass($index + 1)">
+                    {{$index + 1}}
+                </a>
+            </div> 
         </div>
     </div>
 </body>
