@@ -17,7 +17,12 @@
     <div class="navbar navbar-inverse">
             <a class="navbar-brand" href="#">Link Holder</a>
     </div>
-    <div class="panel panel-default row" ng-controller="folderListCtrl">
+    <div class="alert alert-danger" ng-show="data.error">
+        Error({{data.error.status}}).
+        <a href="index.html" class="alert-link">Retry</a>
+    </div>
+    <div class="panel panel-default row" ng-controller="folderListCtrl"
+        ng-hide="data.error">
         <div class="col-xs-3">
             <a ng-click="selectFolder()" 
                 class="btn btn-block btn-default btn-lg">Home</a>

@@ -1,33 +1,15 @@
 angular.module("linkHolder")
-.controller("linkHolderCtrl", function ($scope) {
+.constant("dataUrl","http://localhost:5000/api/values")
+.controller("linkHolderCtrl", function ($scope, $http, dataUrl) {
 
-    $scope.data = {
-        folders:[
-            {"id": 7, "name": "testfolder", "myLinks": [
-                {"id": 14, "description": "test1", "body": "test1"},
-                {"id": 15, "description": "test2", "body": "test2"}]  
-            },
-            {"id": 4, "name": "folder0", "myLinks": [
-                {"id": 6, "description": "education test", "body": "www.tst.com"}]
-            },
-            {"id": 1, "name": "folder1", "myLinks": [
-                {"id": 6, "description": "education ", "body": "www.tst.com"}]
-            },
-            {"id": 1, "name": "folder2", "myLinks": [
-                {"id": 6, "description": "education ", "body": "www.tst.com"}]
-            },
-            {"id": 1, "name": "folder3", "myLinks": [
-                {"id": 6, "description": "education ", "body": "www.tst.com"}]
-            },
-            {"id": 1, "name": "folder4", "myLinks": [
-                {"id": 6, "description": "education ", "body": "www.tst.com"},
-                {"id": 6, "description": "education ", "body": "www.tst.com"},
-                {"id": 6, "description": "education ", "body": "www.tst.com"},
-                {"id": 6, "description": "education ", "body": "www.tst.com"},
-                {"id": 6, "description": "education ", "body": "www.tst.com"},
-                {"id": 6, "description": "education ", "body": "www.tst.com"},
-                {"id": 6, "description": "education ", "body": "www.tst.com"}]
-            }
-        ]
-    };
+    $scope.data = {};
+    console.log(1);
+    $http.get(dataUrl)
+        .then(function (response) {
+            $scope.data.folders = response;
+            console.log(1);
+        },function (error) {
+            $scope.data.error = error;
+            console.log(error);
+        });
 });
