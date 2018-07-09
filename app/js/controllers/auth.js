@@ -8,7 +8,8 @@ angular.module("linkHolderAdmin")
                 $scope.data.folders = response;
                 console.log(response.access_token);
             },function (error) {
-                $scope.data.error = error;
+                $scope.authenticationError = error;
+                //$scope.data.error = error;
                 console.log(error);
             });
     }

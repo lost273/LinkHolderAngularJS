@@ -1,3 +1,10 @@
+
+<div class="alert alert-danger" ng-show="data.error">
+Error({{data.error.status}}).
+<a href="index.html" class="alert-link">Retry</a>
+</div>
+
+
 <div class="panel panel-default row" ng-controller="folderListCtrl"
         ng-hide="data.error">
         <div class="col-xs-3">

@@ -4,26 +4,27 @@
     <meta charset="utf-8">
     <title>Link Holder</title>
     <script src="js/lib/angular.min.js"></script>
+    <script src="js/lib/angular-route.js"></script>
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/lhstyles.css" rel="stylesheet" />
     <script>
-        angular.module("linkHolder",["customFilters"]);
+        angular.module("linkHolder",["customFilters","ngRoute"])
+            .config(function ($routeProvider) {
+                $routeProvider.otherwise({
+                    templateUrl: "index.html"
+                });
+        });
     </script>
-     <script src="js/controllers/linkHolder.js"></script>
-     <script src="js/controllers/folderList.js"></script>
-     <script src="js/controllers/admin.js"></script>
+    <script src="js/controllers/linkHolder.js"></script>
+     <script src="js/controllers/auth.js"></script>
      <script src="js/filters/custom.js"></script>
 </head>
 <body ng-controller="linkHolderCtrl">
-    <div class="navbar navbar-inverse">
-            <a class="navbar-brand" href="#">Link Holder</a>
-    </div>
-    <div class="alert alert-danger" ng-show="data.error">
-        Error({{data.error.status}}).
-        <a href="index.html" class="alert-link">Retry</a>
+    <div class="navbar navbar-dark bg-dark navbar-expand-md">
+        <a class="navbar-brand" href="#">Link Holder</a>
     </div>
     
-    <ng-include src="'views/productList.html'"></ng-include>>
+    <ng-include src="'views/login.html'"></ng-include>
 
 </body>
 </html>
