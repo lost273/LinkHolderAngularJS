@@ -1,14 +1,16 @@
 angular.module("linkHolder")
-.constant("dataUrl","http://localhost:5000/api/values")
-.controller("linkHolderCtrl", function ($scope, $http, dataUrl) {
+.constant("tokenUrl","http://localhost:5000/api/account/token")
+.controller("authCtrl", function ($scope, $http, tokenUrl) {
 
-    /*$scope.data = {};
-    $http.get(dataUrl)
-        .then(function (response) {
-            $scope.data.folders = response;
-            console.log(1);
-        },function (error) {
-            $scope.data.error = error;
-            console.log(error);
-        });*/
+    $scope.authenticate = function (user, pass) {
+        $http.post(tokenUrl, {username: user, password: pass})
+            .then(function (response) {
+                $scope.data.folders = response;
+                console.log(response.access_token);
+            },function (error) {
+                $scope.authenticationError = error;
+                //$scope.data.error = error;
+                console.log(error);
+            });
+    }
 });

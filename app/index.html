@@ -8,23 +8,29 @@
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/lhstyles.css" rel="stylesheet" />
     <script>
-        angular.module("linkHolder",["customFilters","ngRoute"])
+        angular.module("linkHolder",["ngRoute"])
             .config(function ($routeProvider) {
-                $routeProvider.otherwise({
+                $routeProvider.when("/login", {
+                    templateUrl: "/app/views/login.html"
+                });
+
+                $routeProvider.when("/main", {
                     templateUrl: "index.html"
+                });
+
+                $routeProvider.otherwise({
+                    redirectTo: "/login"
                 });
         });
     </script>
     <script src="js/controllers/linkHolder.js"></script>
-     <script src="js/controllers/auth.js"></script>
-     <script src="js/filters/custom.js"></script>
 </head>
-<body ng-controller="linkHolderCtrl">
+<body>
     <div class="navbar navbar-dark bg-dark navbar-expand-md">
         <a class="navbar-brand" href="#">Link Holder</a>
     </div>
     
-    <ng-include src="'views/login.html'"></ng-include>
+    <ng-view/>
 
 </body>
 </html>
