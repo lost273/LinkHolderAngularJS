@@ -17,11 +17,13 @@ angular.module("linkHolder")
             },
             data: {username: user, password: pass}
         }).then(function (response) {
+            
             $location.path("/main");
             $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.access_token;
             console.log(response.data.access_token);
         },function (error) {
             $scope.authenticationError = error;
+            console.log(response.data.access_token);
         });
     }
 });
