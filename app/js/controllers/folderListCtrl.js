@@ -2,23 +2,27 @@ angular.module("linkHolder")
     .constant("folderListActiveClass", "btn-primary")
     .constant("Url","http://localhost:5000/api/values")
     .constant("linkListPageCount", 5)
-    .controller("folderListCtrl", function ($scope, $http, Url, $location,$filter, 
+    .controller("folderListCtrl", function ($scope, $http, Url, $location, 
         folderListActiveClass, linkListPageCount) {
         
         
         $http({
-            method: 'GET',
-            url: Url
-            
+            url: Url,
+            method: "GET",
+            //withCredentials: true,
+            headers: {
+                Authorization: $http.defaults.headers.common.Authorization
+            }
         })
         .then(function (response) {
-            $scope.folder = response;
+            console.log(response);
+
+            //$scope.folder = response;
             
             
         },function (error) {
-            $location.path("/login");
-            $scope.authenticationError = error;
-            console.log(error.status);
+            //$location.path("/login");
+            console.log("ERROR" + error.status);
             console.log($http.defaults.headers.common.Authorization);
         });
 
